@@ -86,7 +86,7 @@ class AuthEndpointTests(BaseUserTestCase):
         self.unauthenticate_client()
         invalid_data = {'username': 'testuser', 'password': 'wrongpassword'}
         response = self.client.post('/api/users/login/', invalid_data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_token_refresh_success(self):
         """
