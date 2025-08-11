@@ -1,0 +1,15 @@
+Hello {{ user.username }},
+
+The following stock alert{{ alerts|pluralize }} you set has/have been triggered:
+
+{% for triggered in alerts %}
+- Stock: {{ triggered.alert.company.stock_symbol }}
+  Condition: {{ triggered.alert.get_condition_display }} {{ triggered.alert.threshold }}
+  Triggered At (UTC): {{ triggered.timestamp|date:"Y-m-d H:i:s" }}
+  Alert Set On (UTC): {{ triggered.alert.created_at|date:"Y-m-d H:i:s" }}
+
+{% endfor %}
+You can log in to your account to manage your alerts.
+
+Thank you,
+The StockWatcher Team

@@ -1,0 +1,47 @@
+# Ignore the local SQLite database.
+db.sqlite3
+/db.sqlite3-journal
+
+/static_root/
+/staticfiles/
+
+# Ignore log files.
+*.log
+logs/
+log/
+
+venv/
+env/
+virtualenv/
+.venv/
+.env/
+
+# Ignore Python bytecode and compiled files.
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore egg and distribution directories.
+*.egg-info/
+*.egg
+dist/
+build/
+wheels/
+*.whl
+
+# Ignore pip cache and log files.
+pip-cache/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# --- Environment & Secrets ---
+.env
+.env.*
+secrets.json
+*.pem
+*.key
+
+# Visual Studio Code
+.vscode/
+*.code-workspace

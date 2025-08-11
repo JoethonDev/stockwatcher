@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_DB: stockwatcher
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    container_name: django
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+    command: >
+      sh -c "
+        python manage.py makemigrations &&
+        python manage.py migrate &&
+        gunicorn --bind 0.0.0.0:8000 stockwatcher.wsgi:application
+      "
+    restart: always
+    
+  celery:
+    build: .
+    command: celery -A stockwatcher worker --loglevel=info
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    restart: always
+
+  celery-beat:
+    build: .
+    command: celery -A stockwatcher beat --loglevel=info
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    restart: always
+
+volumes:
+  postgres_data:
