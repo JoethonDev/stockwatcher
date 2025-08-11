@@ -40,7 +40,7 @@ services:
         gunicorn --bind 0.0.0.0:8000 stockwatcher.wsgi:application
       "
     restart: always
-    
+
   celery:
     build: .
     command: celery -A stockwatcher worker --loglevel=info
