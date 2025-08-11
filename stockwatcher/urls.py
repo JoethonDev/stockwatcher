@@ -1,8 +1,11 @@
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
+    path('', lambda request: redirect('swagger-ui', permanent=False)),
+
     # Django Admin
     path('admin/', admin.site.urls),
 
