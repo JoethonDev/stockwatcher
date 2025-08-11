@@ -11,6 +11,12 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-default-dev-ke
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
+
+CSRF_COOKIE_DOMAIN = '.ngrok-free.app'
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.ngrok-free.app"
+    "https://ngrok-free.app"
+]
 # --- Application Definitions ---
 INSTALLED_APPS = [
     'django.contrib.admin',
