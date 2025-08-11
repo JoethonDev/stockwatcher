@@ -14,7 +14,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(','
 
 CSRF_COOKIE_DOMAIN = '.ngrok-free.app'
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.ngrok-free.app"
+    "https://*.ngrok-free.app",
     "https://ngrok-free.app"
 ]
 # --- Application Definitions ---
